@@ -26,8 +26,8 @@ async function readFolder(pathToFolder) {
   const files = await fs.promises.readdir(pathToFolder, {withFileTypes: true});
   for (const file of files) {
     if (file.isFile()) {
-      let fileInfo = `${file.name.split('.').join(' - ')}`;
-      fs.stat(path.join(pathToFolder, `${file.name}`), (err, stats) => { console.log(`${fileInfo} - ${stats.size}bytes`); });      
+      let fileInfo = `${file.name.split('.').join('.')}`;
+      fs.stat(path.join(pathToFolder, `${file.name}`), (err, stats) => { console.log(`${fileInfo} - ${stats.size}Byte`); });      
     }
   }
 }

@@ -1,10 +1,10 @@
 /*eslint-disable quotes */
-import { writeFile, readFileSync } from "fs";
+const fs = require('fs');
  
-writeFile("./02-write-file/text.txt", "Hello мир!", function(error){
+fs.writeFile("./02-write-file/text.txt", "Hello мир!", function(error){
   if(error) throw error; // если возникла ошибка
   console.log(" Содержимое файла:");
-  let data = readFileSync("./02-write-file/text.txt", "utf8");
+  let data = fs.readFileSync("./02-write-file/text.txt", "utf8");
   console.log(data);  // выводим считанные данные
 });
 

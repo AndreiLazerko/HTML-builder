@@ -1,6 +1,6 @@
-import { createReadStream } from "fs";
-let readableStream = createReadStream("./01-read-file/text.txt", "utf8");
- 
-readableStream.on("data", function(chunk){ 
-    console.log(chunk);
-});
+const fs = require('fs');
+const path = require('path');
+
+const stream = fs.createReadStream(path.join(__dirname, '/text.txt'), 'utf-8');
+
+stream.on('data', chunk => console.log(chunk));

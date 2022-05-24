@@ -1,9 +1,25 @@
 const fs = require('fs');
-const { COPYFILE_EXCL } = fs.constants;
+const path = require('path');
 
-// destination.txt will be created or overwritten by default.
-fs.copyFileSync('file', 'fileCopyt', COPYFILE_EXCL);
-console.log('source.txt was copied to destination.txt');
+const folderPath = path.join(__dirname, 'files');
+const folderPathCopy = path.join(__dirname, 'files-copy');
 
-// By using COPYFILE_EXCL, the operation will fail if destination.txt exists.
-// fs.copyFileSync('source.txt', 'destination.txt', COPYFILE_EXCL);
+
+function copyDir(folder, folderCopy) {
+  fs.readdir(folder, (error, files) => {
+    for(const file of files) {
+      fs.readFile(path.join(folder, file), 'utf-8', (error, data) => {
+        
+        fs.mkdir(folderCopy, {recursive:true}, () => {
+          fs.writeFile(path.join(folderCopy, file), data, (error) => {
+            if (error) {
+              throw error;
+            }
+          });
+        });
+      });
+    }
+  });
+}
+
+copyDir(folderPath, folderPathCopy);
